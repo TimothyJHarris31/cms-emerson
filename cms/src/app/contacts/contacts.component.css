@@ -1,0 +1,29 @@
+.contacts-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-top: 20px;
+}
+
+/* Style for contact list and detail side-by-side */
+cms-contact-list, cms-contact-detail {
+  flex: 1;
+  min-width: 300px;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.3s ease;
+}
+
+cms-contact-list:hover, cms-contact-detail:hover {
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Optional: responsive tweaks */
+@media (max-width: 768px) {
+  .contacts-wrapper {
+    flex-direction: column;
+  }
+}
