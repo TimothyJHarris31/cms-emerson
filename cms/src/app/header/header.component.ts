@@ -1,17 +1,15 @@
 import { Component, Output, EventEmitter } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'cms-header',
-  standalone: true,
-  imports: [CommonModule],
+  standalone: false,
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent {
-  @Output() selectedFeatureEvent = new EventEmitter<string>();  // Must be type string
+  @Output() selectedFeatureEvent = new EventEmitter<string>(); // Must be type string
 
   onSelected(feature: string) {
-    this.selectedFeatureEvent.emit(feature);  // Emit a string like 'documents'
+    this.selectedFeatureEvent.emit(feature); // Emit a string like 'documents'
   }
 }
