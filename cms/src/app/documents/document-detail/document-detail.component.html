@@ -1,1 +1,6 @@
-<p>document-detail works!</p>
+<div *ngIf="document" class="panel panel-info">
+  <div class="panel-heading">{{ document.name }}</div>
+  <div class="panel-body">
+    <p>{{ document.description }}</p>
+  </div>
+</div>

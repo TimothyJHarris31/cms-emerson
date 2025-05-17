@@ -1,0 +1,27 @@
+.document-card {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: box-shadow 0.2s;
+  background-color: #fff;
+}
+
+.document-card:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.pad-left-right {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.center-panel {
+  padding: 15px;
+}

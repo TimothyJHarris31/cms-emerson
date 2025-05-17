@@ -4,7 +4,6 @@ import { HeaderComponent } from './header/header.component';
 import { ContactDetailComponent } from './contacts/contact-detail/contact-detail.component';
 import { ContactItemComponent } from './contacts/contact-item/contact-item.component';
 import { ContactListComponent } from './contacts/contact-list/contact-list.component';
-import { DocumentsComponent } from './documents/documents.component';
 import { MessageListComponent } from './messages/message-list/message-list.component';
 import { MessageItemComponent } from './messages/message-item/message-item.component';
 import { MessageEditComponent } from './messages/message-edit/message-edit.component';
@@ -19,7 +18,6 @@ import { BrowserModule } from '@angular/platform-browser';
     ContactDetailComponent,
     ContactItemComponent,
     ContactListComponent,
-    DocumentsComponent,
     MessageListComponent,
     MessageItemComponent,
     MessageEditComponent,
