@@ -1,30 +1,31 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Message } from '../message.model';
+import { MessageService } from '../message.service';
 
 @Component({
   selector: 'cms-message-list',
-  standalone: false,
   templateUrl: './message-list.component.html',
   styleUrls: ['./message-list.component.css'],
+  standalone: false,
 })
-export class MessageListComponent {
-  messages: Message[] = [
-    new Message(
-      '1',
-      'Welcome!',
-      'Hello and welcome to the messaging app!',
-      'Alice'
-    ),
-    new Message('2', 'Lunch?', 'Do you want to grab lunch at noon?', 'Bob'),
-    new Message(
-      '3',
-      'Reminder',
-      'Don’t forget our meeting at 3 PM.',
-      'Charlie'
-    ),
-  ];
+export class MessageListComponent implements OnInit, OnDestroy {
+  messages: Message[] = [];
+  private messagesChangedSubscription!: Subscription;
 
-  onAddMessage(message: Message) {
-    this.messages.push(message);
+  constructor(private messageService: MessageService) {}
+
+  ngOnInit(): void {
+    this.messages = this.messageService.getMessages();
+
+    this.messagesChangedSubscription = this.messageService.messageChangedEvent.subscribe(
+      (messages: Message[]) => {
+        this.messages = messages;
+      }
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.messagesChangedSubscription.unsubscribe();
   }
 }

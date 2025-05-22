@@ -1,43 +1,35 @@
-import {
-  Component,
-  ElementRef,
-  EventEmitter,
-  Output,
-  ViewChild,
-} from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Message } from '../message.model';
+import { MessageService } from '../message.service';
 
 @Component({
   selector: 'cms-message-edit',
-  standalone: false,
   templateUrl: './message-edit.component.html',
+  standalone: false,
   styleUrls: ['./message-edit.component.css'],
 })
 export class MessageEditComponent {
-  // Local reference to the input elements
   @ViewChild('subject') subjectInputRef!: ElementRef;
   @ViewChild('msgText') msgTextInputRef!: ElementRef;
 
-  // Emit event to parent
-  @Output() messageAdded = new EventEmitter<Message>();
+  currentSender = 'Your Name';
 
-  currentSender = 'Your Name'; // Change this to your actual name
+  constructor(private messageService: MessageService) {}
 
   onSendMessage() {
     const subject = this.subjectInputRef.nativeElement.value;
     const msgText = this.msgTextInputRef.nativeElement.value;
 
-    if (!subject || !msgText) return; // Simple validation
+    if (!subject || !msgText) return;
 
     const newMessage = new Message(
-      Math.random().toString(), // Hardcoded/random id
+      Math.random().toString(),
       subject,
       msgText,
       this.currentSender
     );
 
-    this.messageAdded.emit(newMessage); // Emit the message to the list
-    this.onClear(); // Optional: clear form after sending
+    this.messageService.addMessage(newMessage);
   }
 
   onClear() {
