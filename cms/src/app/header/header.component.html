@@ -6,4 +6,16 @@
       <li><a (click)="onSelected('contacts')">Contacts</a></li>
     </ul>
   </div>
+  <div class="nav navbar-nav navbar-right">
+    <div class="dropdown" appDropdown>
+      <button class="btn btn-secondary dropdown-toggle" type="button">
+        User
+      </button>
+      <div class="dropdown-menu dropdown-menu-right">
+        <a class="dropdown-item" href="#">Login</a>
+        <a class="dropdown-item" href="#">Other</a>
+        <a class="dropdown-item" href="#">Logout</a>
+      </div>
+    </div>
+</div>
 </nav>
