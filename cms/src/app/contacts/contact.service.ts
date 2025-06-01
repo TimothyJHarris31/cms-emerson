@@ -6,23 +6,33 @@ import { MOCKCONTACTS } from './MOCKCONTACTS';
   providedIn: 'root'
 })
 export class ContactService {
-  contacts: Contact[] = [];
-contactSelectedEvent = new EventEmitter<Contact>();
+  contacts: Contact[] = MOCKCONTACTS;
 
-  constructor() {
-    this.contacts = MOCKCONTACTS;
-  }
+  contactChangedEvent = new EventEmitter<Contact[]>();
+  contactSelectedEvent = new EventEmitter<Contact>();
+
+  constructor() {}
+
 
   getContacts(): Contact[] {
-    return this.contacts.slice(); // returns a copy of the array
+    return this.contacts.slice();
   }
 
-  getContact(id: string): Contact {
-    for (let contact of this.contacts) {
-      if (contact.id === id) {
-        return contact;
-      }
+
+  getContact(id: string): Contact | undefined {
+    return this.contacts.find(c => c.id === id);
+  }
+
+ 
+  deleteContact(contact: Contact): void {
+    if (!contact) {
+      return;
     }
-    return null!;
+    const pos = this.contacts.indexOf(contact);
+    if (pos < 0) {
+      return;
+    }
+    this.contacts.splice(pos, 1);
+    this.contactChangedEvent.emit(this.contacts.slice());
   }
 }

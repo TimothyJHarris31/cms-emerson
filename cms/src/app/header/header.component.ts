@@ -6,10 +6,5 @@ import { Component, Output, EventEmitter } from '@angular/core';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
 })
-export class HeaderComponent {
-  @Output() selectedFeatureEvent = new EventEmitter<string>(); // Must be type string
 
-  onSelected(feature: string) {
-    this.selectedFeatureEvent.emit(feature); // Emit a string like 'documents'
-  }
-}
+export class HeaderComponent {}

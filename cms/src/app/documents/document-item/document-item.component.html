@@ -1,6 +1,10 @@
-<div class="card">
+<a 
+  [routerLink]="[document.id]" 
+  routerLinkActive="active" 
+  class="card mb-2 text-decoration-none text-dark"
+  style="cursor: pointer;">
   <div class="card-body">
     <h5 class="card-title">{{ document.name }}</h5>
     <p class="card-text">{{ document.description }}</p>
   </div>
-</div>
+</a>

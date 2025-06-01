@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -19,26 +20,33 @@ import { DocumentListComponent } from './documents/document-list/document-list.c
 import { DocumentItemComponent } from './documents/document-item/document-item.component';
 import { DropdownDirective } from './dropdown.directive';
 
+import { AppRoutingModule } from './app-routing.module';
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    ContactsComponent,
-    ContactDetailComponent,
     ContactItemComponent,
-    ContactListComponent,
     MessageListComponent,
     MessageItemComponent,
     MessageEditComponent,
     DocumentsComponent,
-    DocumentListComponent,
     DocumentItemComponent,
-    DocumentDetailComponent,
-    DropdownDirective
+    DropdownDirective,
+    ContactsComponent,
 
   ],
-  imports: [BrowserModule],
-  bootstrap: [AppComponent],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    AppRoutingModule,
+    ContactDetailComponent,
+    DocumentListComponent,
+    DocumentDetailComponent,
+    ContactListComponent,
+    RouterModule
+  ]
 })
 export class AppModule {}

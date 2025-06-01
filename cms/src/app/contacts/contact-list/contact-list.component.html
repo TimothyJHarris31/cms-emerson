@@ -1,15 +1,19 @@
 <div class="panel panel-primary">
   <div class="panel-heading clearfix">
     <h3 class="panel-title pull-left">Contacts</h3>
-    <a class="btn btn-success pull-right" href="#">New Contact</a>
+    <a class="btn btn-success pull-right" [routerLink]="['/contacts', 'new']">New Contact</a>
   </div>
   <div class="panel-body">
     <ul class="list-group">
-      <li *ngFor="let contact of contacts" class="list-group-item">
-        <cms-contact-item 
-          [contact]="contact" 
-          (contactSelected)="onSelected(contact)">
-        </cms-contact-item>
+      <li 
+        *ngFor="let contact of contacts" 
+        class="list-group-item"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <a [routerLink]="['/contacts', contact.id]" class="contact-link">
+          <cms-contact-item [contact]="contact"></cms-contact-item>
+        </a>
       </li>
     </ul>
   </div>
