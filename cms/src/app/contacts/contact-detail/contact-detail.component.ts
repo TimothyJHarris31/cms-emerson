@@ -6,7 +6,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'cms-contact-detail',
   templateUrl: './contact-detail.component.html',
-  styleUrls: ['./contact-detail.component.css']
+  styleUrls: ['./contact-detail.component.css'],
+  standalone: false,
 })
 export class ContactDetailComponent implements OnInit {
   contact!: Contact;
@@ -18,7 +19,7 @@ export class ContactDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
+    this.route.params.subscribe((params) => {
       const id = params['id'];
       this.contact = this.contactService.getContact(id)!;
     });

@@ -5,7 +5,8 @@ import { ContactService } from '../contact.service';
 @Component({
   selector: 'cms-contact-list',
   templateUrl: './contact-list.component.html',
-  styleUrls: ['./contact-list.component.css']
+  styleUrls: ['./contact-list.component.css'],
+  standalone: false,
 })
 export class ContactListComponent implements OnInit {
   contacts: Contact[] = [];

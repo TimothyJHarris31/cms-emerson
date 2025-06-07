@@ -18,35 +18,30 @@ import { DocumentsComponent } from './documents/documents.component';
 import { DocumentDetailComponent } from './documents/document-detail/document-detail.component';
 import { DocumentListComponent } from './documents/document-list/document-list.component';
 import { DocumentItemComponent } from './documents/document-item/document-item.component';
+import { DocumentEditComponent } from './documents/document-edit/document-edit.component';
 import { DropdownDirective } from './dropdown.directive';
 
 import { AppRoutingModule } from './app-routing.module';
-
-
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    ContactItemComponent,
     MessageListComponent,
     MessageItemComponent,
     MessageEditComponent,
     DocumentsComponent,
-    DocumentItemComponent,
     DropdownDirective,
     ContactsComponent,
-
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    AppRoutingModule,
     ContactDetailComponent,
+    ContactItemComponent,
+    ContactListComponent,
     DocumentListComponent,
     DocumentDetailComponent,
-    ContactListComponent,
-    RouterModule
-  ]
+    DocumentItemComponent,
+    DocumentEditComponent,
+  ],
+  imports: [BrowserModule, AppRoutingModule, AppRoutingModule, RouterModule],
+  bootstrap: [AppComponent],
 })
 export class AppModule {}
