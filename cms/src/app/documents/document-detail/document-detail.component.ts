@@ -8,9 +8,10 @@ import { WindRefService } from '../../wind-ref.service';
   selector: 'cms-document-detail',
   templateUrl: './document-detail.component.html',
   styleUrls: ['./document-detail.component.css'],
+  standalone: false,
 })
 export class DocumentDetailComponent implements OnInit {
-  document!: Document;
+  document?: Document;
   nativeWindow: any;
 
   constructor(
@@ -36,7 +37,7 @@ export class DocumentDetailComponent implements OnInit {
   }
 
   onDelete(): void {
-    this.documentService.deleteDocument(this.document);
+    this.documentService.deleteDocument(this.document!);
     this.router.navigate(['/documents']);
   }
 }
