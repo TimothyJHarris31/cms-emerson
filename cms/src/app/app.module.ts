@@ -22,6 +22,8 @@ import { DocumentEditComponent } from './documents/document-edit/document-edit.c
 import { DropdownDirective } from './dropdown.directive';
 
 import { AppRoutingModule } from './app-routing.module';
+import { FormsModule } from '@angular/forms'; 
+import { DndModule } from 'ng2-dnd';
 
 @NgModule({
   declarations: [
@@ -39,9 +41,9 @@ import { AppRoutingModule } from './app-routing.module';
     DocumentListComponent,
     DocumentDetailComponent,
     DocumentItemComponent,
-    DocumentEditComponent,
+    DocumentEditComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, AppRoutingModule, RouterModule],
+  imports: [BrowserModule, AppRoutingModule, AppRoutingModule, RouterModule, FormsModule, DndModule.forRoot()],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

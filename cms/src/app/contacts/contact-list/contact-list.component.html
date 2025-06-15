@@ -5,11 +5,15 @@
   </div>
   <div class="panel-body">
     <ul class="list-group">
-      <li 
-        *ngFor="let contact of contacts" 
+      <li
+        *ngFor="let contact of contacts"
         class="list-group-item"
         routerLinkActive="active"
         [routerLinkActiveOptions]="{ exact: true }"
+        dnd-draggable
+        [dragEnabled]="true"
+        [dragData]="contact"
+        [dropZones]="['contactGroup']"
       >
         <a [routerLink]="['/contacts', contact.id]" class="contact-link">
           <cms-contact-item [contact]="contact"></cms-contact-item>
