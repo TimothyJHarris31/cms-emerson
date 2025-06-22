@@ -10,6 +10,7 @@ import { ContactService } from '../contact.service';
 })
 export class ContactListComponent implements OnInit {
   contacts: Contact[] = [];
+  term: string = ''; 
 
   constructor(private contactService: ContactService) {}
 
@@ -19,5 +20,10 @@ export class ContactListComponent implements OnInit {
     this.contactService.contactChangedEvent.subscribe((contacts: Contact[]) => {
       this.contacts = contacts;
     });
+  }
+
+
+  search(value: string): void {
+    this.term = value;
   }
 }

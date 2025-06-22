@@ -1,12 +1,25 @@
 <div class="panel panel-primary">
   <div class="panel-heading clearfix">
     <h3 class="panel-title pull-left">Contacts</h3>
+
+    <!-- Search input next to the New Contact button -->
+    <div class="pull-left" style="margin-left: 20px; margin-top: 5px; max-width: 300px;">
+      <input
+        type="text"
+        #searchBox
+        class="form-control"
+        placeholder="Enter a search value"
+        (keyup)="search(searchBox.value)"
+      />
+    </div>
+
     <a class="btn btn-success pull-right" [routerLink]="['/contacts', 'new']">New Contact</a>
   </div>
+
   <div class="panel-body">
     <ul class="list-group">
       <li
-        *ngFor="let contact of contacts"
+        *ngFor="let contact of contacts | contactsFilter:term"
         class="list-group-item"
         routerLinkActive="active"
         [routerLinkActiveOptions]="{ exact: true }"

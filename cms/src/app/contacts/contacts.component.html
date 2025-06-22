@@ -1,4 +1,13 @@
-<div class="row">
-<cms-contact-list></cms-contact-list>
-<router-outlet></router-outlet>
+<div class="contact-search mb-3">
+  <input type="text"
+         class="form-control"
+         placeholder="Search contacts by name"
+         [(ngModel)]="searchTerm">
 </div>
+
+<ul class="list-group">
+  <li *ngFor="let contact of contacts | contactsFilter:searchTerm"
+      class="list-group-item">
+    {{ contact.name }}
+  </li>
+</ul>

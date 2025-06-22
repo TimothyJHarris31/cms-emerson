@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 
+import { HttpClientModule } from '@angular/common/http';
+
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 
@@ -24,6 +26,7 @@ import { DropdownDirective } from './dropdown.directive';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms'; 
 import { DndModule } from 'ng2-dnd';
+import { ContactsFilterPipe } from './contacts/contacts-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -41,9 +44,17 @@ import { DndModule } from 'ng2-dnd';
     DocumentListComponent,
     DocumentDetailComponent,
     DocumentItemComponent,
-    DocumentEditComponent
+    DocumentEditComponent,
+    ContactsFilterPipe
   ],
-  imports: [BrowserModule, AppRoutingModule, AppRoutingModule, RouterModule, FormsModule, DndModule.forRoot()],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    RouterModule,
+    FormsModule,
+    DndModule.forRoot(),
+    HttpClientModule 
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
