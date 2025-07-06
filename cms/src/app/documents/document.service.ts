@@ -9,8 +9,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class DocumentService {
   documents: Document[] = [];
   documentListChangedEvent = new Subject<Document[]>();
-  maxDocumentId: number = 0;
-  private documentsUrl = 'https://your-firebase-url/documents.json';
+  private documentsUrl = 'http://localhost:3000/documents';
 
   constructor(private http: HttpClient) {}
 
@@ -18,7 +17,6 @@ export class DocumentService {
     this.http.get<Document[]>(this.documentsUrl).subscribe(
       (documents: Document[]) => {
         this.documents = documents ? documents : [];
-        this.maxDocumentId = this.getMaxId();
         this.documents.sort((a, b) => a.name.localeCompare(b.name));
         this.documentListChangedEvent.next(this.documents.slice());
       },
@@ -26,46 +24,59 @@ export class DocumentService {
     );
   }
 
-  storeDocuments() {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    const documentsString = JSON.stringify(this.documents);
-
-    this.http.put(this.documentsUrl, documentsString, { headers }).subscribe(() => {
-      this.documentListChangedEvent.next(this.documents.slice());
-    });
-  }
-
   addDocument(newDocument: Document) {
     if (!newDocument) return;
-    this.maxDocumentId++;
-    newDocument.id = this.maxDocumentId.toString();
-    this.documents.push(newDocument);
-    this.storeDocuments();  
+
+    newDocument.id = '';  // Ensure empty id, server will assign
+
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+    this.http.post<{ message: string; document: Document }>(this.documentsUrl, newDocument, { headers })
+      .subscribe(
+        (response) => {
+          this.documents.push(response.document);
+          this.documents.sort((a, b) => a.name.localeCompare(b.name));
+          this.documentListChangedEvent.next(this.documents.slice());
+        },
+        error => console.error('Error adding document:', error)
+      );
   }
 
   updateDocument(originalDocument: Document, newDocument: Document) {
     if (!originalDocument || !newDocument) return;
-    const pos = this.documents.indexOf(originalDocument);
+
+    const pos = this.documents.findIndex(d => d.id === originalDocument.id);
     if (pos < 0) return;
+
     newDocument.id = originalDocument.id;
-    this.documents[pos] = newDocument;
-    this.storeDocuments(); 
+    newDocument._id = originalDocument._id;
+
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+    this.http.put(`${this.documentsUrl}/${originalDocument.id}`, newDocument, { headers })
+      .subscribe(
+        () => {
+          this.documents[pos] = newDocument;
+          this.documents.sort((a, b) => a.name.localeCompare(b.name));
+          this.documentListChangedEvent.next(this.documents.slice());
+        },
+        error => console.error('Error updating document:', error)
+      );
   }
 
   deleteDocument(document: Document) {
     if (!document) return;
-    const pos = this.documents.indexOf(document);
-    if (pos < 0) return;
-    this.documents.splice(pos, 1);
-    this.storeDocuments();  
-  }
 
-  getMaxId(): number {
-    let maxId = 0;
-    for (const doc of this.documents) {
-      const id = parseInt(doc.id, 10);
-      if (id > maxId) maxId = id;
-    }
-    return maxId;
+    const pos = this.documents.findIndex(d => d.id === document.id);
+    if (pos < 0) return;
+
+    this.http.delete(`${this.documentsUrl}/${document.id}`)
+      .subscribe(
+        () => {
+          this.documents.splice(pos, 1);
+          this.documentListChangedEvent.next(this.documents.slice());
+        },
+        error => console.error('Error deleting document:', error)
+      );
   }
 }
